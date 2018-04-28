@@ -10,17 +10,23 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * 爬取Town一级的数据
- * Created by tab.ren on 2018/4/27.
+ * 获取Village一级的信息
+ * Created by tab.ren on 2018/4/28.
  */
-public class Town {
-  public SpiderMap getTownMap(SpiderMap countyMap, String countyName) throws IOException {
+public class Village {
+
+  public SpiderMap getVillage(SpiderMap townMap, String townName) throws IOException {
     String prefix = "";
     String index = "";
-    for (Map<String, String> map : countyMap.getNameMaps()) {
-      if (countyName.equals(map.get("name"))) {
+    for (Map<String, String> map : townMap.getNameMaps()) {
+      if (townName.equals(map.get("name"))) {
         index = map.get("href");
-        prefix = index.substring(index.indexOf("/") + 1).substring(0, 2);
+        index = index.substring(index.indexOf("/") + 1);
+        String code = index.substring(index.indexOf("/") + 1).substring(0, 6);
+        String provinceCode = code.substring(0, 2);
+        String cityCode = code.substring(2, 4);
+        String townCode = code.substring(4, 6);
+        prefix = provinceCode + "/" + cityCode + "/" + townCode;
         break;
       }
     }
@@ -30,6 +36,7 @@ public class Town {
         .postDataCharset(StaticValue.charset).execute();
     Document document = response.parse();
     SpiderUtil spiderUtil = new SpiderUtil();
-    return spiderUtil.getMapFromElements(document, "towntr", prefix);
+    return spiderUtil.getMapFromElements(document, "villagetr", "");
   }
+
 }

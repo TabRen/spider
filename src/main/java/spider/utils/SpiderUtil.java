@@ -27,7 +27,13 @@ public class SpiderUtil {
     String childrenHref;
     try {
       for (Element element : elements) {
-        Elements childrens = element.getElementsByTag("a");
+        Elements childrens = new Elements();
+        //village一级的数据没有链接
+        if ("villagetr".equals(element.className())) {
+          childrens = element.getElementsByTag("td");
+        } else {
+          childrens = element.getElementsByTag("a");
+        }
         if (0 == childrens.size()) {
           continue;
         }

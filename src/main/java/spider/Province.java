@@ -16,10 +16,6 @@ import java.util.Map;
  */
 public class Province {
 
-  /**
-   * Key: provinceCode
-   * Value: provinceName
-   */
   public SpiderMap getProvince() throws IOException {
     SpiderMap provinceMap = new SpiderMap();
     final String url = StaticValue.baseUrl + "index.html";

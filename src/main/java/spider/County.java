@@ -15,10 +15,6 @@ import java.util.Map;
  */
 public class County {
 
-  /**
-   * Key: countyCode
-   * Value: countyName
-   */
   public SpiderMap getCounty(SpiderMap cityMap, String cityName) throws IOException {
     String index = "";
     for (Map<String, String> map : cityMap.getNameMaps()) {

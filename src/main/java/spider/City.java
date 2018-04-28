@@ -15,10 +15,6 @@ import java.util.Map;
  */
 public class City {
 
-  /**
-   * Key: cityCode
-   * Value: cityName
-   */
   public SpiderMap getCity(SpiderMap province, String provinceName) throws IOException {
     String index = "";
     for (Map<String, String> map : province.getNameMaps()) {
