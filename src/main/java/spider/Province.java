@@ -8,7 +8,6 @@ import org.jsoup.select.Elements;
 import spider.utils.SpiderMap;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * 爬取省一级的数据
@@ -26,9 +25,7 @@ public class Province {
     //链接
     String provinceHref;
     Connection connection = Jsoup.connect(url).maxBodySize(0);
-    Connection.Response response = connection.ignoreContentType(true).method(Connection.Method.GET)
-        .postDataCharset(StaticValue.charset).execute();
-    Document document = response.parse();
+    Document document = connection.get();
     Elements elements = document.getElementsByClass("provincetr");
     for (Element element : elements) {
       for (Element children : element.children()) {

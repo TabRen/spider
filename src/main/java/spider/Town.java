@@ -14,6 +14,7 @@ import java.util.Map;
  * Created by tab.ren on 2018/4/27.
  */
 public class Town {
+
   public SpiderMap getTownMap(SpiderMap countyMap, String countyName) throws IOException {
     String prefix = "";
     String index = "";
@@ -26,9 +27,7 @@ public class Town {
     }
     final String url = StaticValue.baseUrl + prefix + "/" + index;
     Connection connection = Jsoup.connect(url).maxBodySize(0);
-    Connection.Response response = connection.ignoreContentType(true).method(Connection.Method.GET)
-        .postDataCharset(StaticValue.charset).execute();
-    Document document = response.parse();
+    Document document = connection.get();
     SpiderUtil spiderUtil = new SpiderUtil();
     return spiderUtil.getMapFromElements(document, "towntr", prefix);
   }

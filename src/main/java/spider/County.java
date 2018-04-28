@@ -25,9 +25,7 @@ public class County {
     }
     final String url = StaticValue.baseUrl + index;
     Connection connection = Jsoup.connect(url).maxBodySize(0);
-    Connection.Response response = connection.ignoreContentType(true).method(Connection.Method.GET)
-        .postDataCharset(StaticValue.charset).execute();
-    Document document = response.parse();
+    Document document = connection.get();
     SpiderUtil spiderUtil = new SpiderUtil();
     return spiderUtil.getMapFromElements(document, "countytr", "");
   }
